@@ -1,0 +1,6 @@
+{
+  "name": "Lead Extractor & Manager",
+  "description": "Completely local, private lead extraction from forms and handwriting, structured via client-side AI heuristics, organized into categorized folders, and exported to Excel sheets.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

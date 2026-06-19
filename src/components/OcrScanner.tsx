@@ -18,7 +18,7 @@ interface OcrScannerProps {
 
 export default function OcrScanner({ folders, currentFolderId, onLeadAdded }: OcrScannerProps) {
   const [selectedPresetId, setSelectedPresetId] = useState(PRESET_SAMPLES[0].id);
-  const [activeTab, setActiveTab] = useState<'preset' | 'upload'>('preset');
+  const [activeTab, setActiveTab] = useState<'preset' | 'upload'>('upload');
   const [dragging, setDragging] = useState(false);
   const [logs, setLogs] = useState<ParsingLog[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);

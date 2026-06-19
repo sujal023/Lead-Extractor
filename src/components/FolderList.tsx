@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from 'react';
-import { Folder, FolderPlus, Trash2, Hash, ShieldCheck } from 'lucide-react';
+import { Folder, FolderPlus, Trash2, Hash, ShieldCheck, X } from 'lucide-react';
 import { Folder as FolderType } from '../types';
 
 interface FolderListProps {
@@ -14,6 +14,7 @@ interface FolderListProps {
   onCreateFolder: (name: string, description: string, color: string) => void;
   onDeleteFolder: (id: string) => void;
   leadCounts: Record<string, number>;
+  onCloseSidebar?: () => void;
 }
 
 const PRESET_COLORS = [
@@ -31,6 +32,7 @@ export default function FolderList({
   onCreateFolder,
   onDeleteFolder,
   leadCounts,
+  onCloseSidebar,
 }: FolderListProps) {
   const [isCreating, setIsCreating] = useState(false);
   const [newFolderName, setNewFolderName] = useState('');
@@ -53,16 +55,27 @@ export default function FolderList({
       
       {/* Sidebar Header Brand block matches Q4 Real Estate theme logo style */}
       <div className="p-6 pb-2">
-        <div className="flex items-center gap-2.5 mb-6">
-          <div className="w-8.5 h-8.5 bg-indigo-600 rounded-xl flex items-center justify-center shadow-md shadow-indigo-550/20">
-            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
+        <div className="flex items-center justify-between gap-2 mb-6">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-8.5 h-8.5 bg-indigo-600 rounded-xl flex items-center justify-center shadow-md shadow-indigo-550/20 shrink-0">
+              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <div className="flex flex-col min-w-0">
+              <span className="font-extrabold text-white tracking-tight text-lg leading-tight truncate">LeadSync</span>
+              <span className="text-[9px] text-slate-500 font-mono tracking-widest uppercase font-bold truncate">Local Extractor</span>
+            </div>
           </div>
-          <div className="flex flex-col">
-            <span className="font-extrabold text-white tracking-tight text-lg leading-tight">LeadSync</span>
-            <span className="text-[9px] text-slate-500 font-mono tracking-widest uppercase font-bold">Local Extractor</span>
-          </div>
+          {onCloseSidebar && (
+            <button
+              onClick={onCloseSidebar}
+              className="md:hidden p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-all shrink-0"
+              title="Close sidebar"
+            >
+              <X className="w-4.5 h-4.5" />
+            </button>
+          )}
         </div>
 
         <div className="flex items-center justify-between mb-4 border-b border-slate-800/60 pb-2">
